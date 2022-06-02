@@ -33,14 +33,14 @@ class Server:
         return websockets.serve(self.handler, self.get_host(), self.get_port())
 
     def save_noise(self):
-        fname = f'{Server.current_noise_hash}_{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}'
-        os.mkdir(f"mouth_sounds/{fname}")
-        with open(f"mouth_sounds/{fname}/{fname}.wav", 'wb') as f:
+        fname = f'mouth_sounds/test{np.random.randint(1,5)}/{Server.current_noise_hash}_{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.wav'
+        # os.mkdir(f"mouth_sounds/{fname}")
+        with open(fname, 'wb') as f:
             f.write(Server.current_noise)
-        with open(f"mouth_sounds/{fname}/{fname}.pickle", 'wb') as f:
-            sampRate, data = wavfile.read(f"mouth_sounds/{fname}/{fname}.wav")
-            pickle.dump(list(np.delete(data, 1, 1).flatten()), f)
-        return f"mouth_sounds/{fname}"
+        # with open(f"mouth_sounds/{fname}/{fname}.pickle", 'wb') as f:
+        #     sampRate, data = wavfile.read(f"mouth_sounds/{fname}/{fname}.wav")
+        #     pickle.dump(list(np.delete(data, 1, 1).flatten()), f)
+        return fname
 
     async def handler(self, websocket, path):
         self.connected.add(websocket)
