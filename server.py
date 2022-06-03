@@ -33,7 +33,7 @@ class Server:
         return websockets.serve(self.handler, self.get_host(), self.get_port())
 
     def save_noise(self):
-        fname = f'mouth_sounds/test{np.random.randint(1,5)}/{Server.current_noise_hash}_{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.wav'
+        fname = f'mouth_sounds/{Server.current_noise_hash}_{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.wav'
         # os.mkdir(f"mouth_sounds/{fname}")
         with open(fname, 'wb') as f:
             f.write(Server.current_noise)
